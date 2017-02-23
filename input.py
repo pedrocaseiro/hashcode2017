@@ -15,7 +15,25 @@ class Request:
         self.video = video
         self.endpoint = endpoint
         self.n_requests = n_requests
-        self.i = i
+        self.id = id
 
 def input_parser():
+    V, E, R, C, X = map(int, input().split()) 
 
+    videos = []
+    for id, size in enumerate(map(int, input().split())):
+        videos.append(Video(id, size))
+
+    endpoints = []
+    for i in range(E):
+        endpoint_to_datacenter_latency, n_caches = map(int, input().split())
+        caches_latency = {}
+        for j in range(n_caches):
+            cache_id, cache_latency = map(int, input().split())
+            caches_latency.update({cache_id: cache_latency})
+        endpoints.append(Endpoint(endpoint_to_datacenter_latency, n_caches, caches_latency, i))
+
+    requests = []
+    for i in range(R):
+        video_id, endpoint_id, n_requests = map(int, input().split())
+        requests.append(Request(video_id, endpoint_id, n_requests, i))
