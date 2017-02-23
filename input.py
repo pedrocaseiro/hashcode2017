@@ -37,3 +37,5 @@ def input_parser():
     for i in range(R):
         video_id, endpoint_id, n_requests = map(int, input().split())
         requests.append(Request(video_id, endpoint_id, n_requests, i))
+
+    return V, E, R, C, X, videos, endpoints, requests 
