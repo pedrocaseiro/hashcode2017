@@ -1,13 +1,14 @@
 import input
+import output
 import sys
 
 def algorithm():
 
     V, E, R, C, X, caches, videos, endpoints, requests = input.input_parser()
-    
+
     sys.stdout = open('output.txt', 'w')
 
-    endpoint_statistics = {} 
+    endpoint_statistics = {}
     for r in requests:
         aux = {r.video: r.n_requests}
         endpoint_statistics.setdefault(r.endpoint, []).append(aux)
@@ -21,7 +22,7 @@ def algorithm():
                 total = videos[key].size * value
                 sorted_videos.append((total,  key))
         sorted_videos = sorted(sorted_videos, key=lambda tup: tup[0])
-        
+
         for i in endpoints[endpoint].cache_latency:
             for idx, j in enumerate(sorted_videos):
                 if caches[i].free_size> videos[j[1]].size:
@@ -29,11 +30,10 @@ def algorithm():
                     sorted_videos.pop(idx)
                     caches[i].free_size -= videos[j[1]].size
 
-        for i in caches:
-            print(i.videos)
+        output.output(caches)
 
-            
-    
+
+
 
 
 if __name__ == '__main__':
