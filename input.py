@@ -21,8 +21,7 @@ def input_parser():
     V, E, R, C, X = map(int, input().split()) 
 
     videos = []
-    for id, size in enumerate(map(int, input().split())):
-        videos.append(Video(id, size))
+    [videos.append(Video(id, size)) for id, size in enumerate(map(int, input().split()))]
 
     endpoints = []
     for i in range(E):
