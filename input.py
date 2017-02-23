@@ -16,9 +16,20 @@ class Request:
         self.endpoint = endpoint
         self.n_requests = n_requests
         self.id = id
+        
+class Cache:
+    def __init__(self, max_size, id):
+        self.max_size = max_size
+        self.id = id
+        self.free_size = max_size 
+        self.videos = []
 
 def input_parser():
     V, E, R, C, X = map(int, input().split()) 
+
+    caches = []
+    for i in range(C):
+        caches.append(Cache(X, i))
 
     videos = []
     [videos.append(Video(id, size)) for id, size in enumerate(map(int, input().split()))]
@@ -37,4 +48,4 @@ def input_parser():
         video_id, endpoint_id, n_requests = map(int, input().split())
         requests.append(Request(video_id, endpoint_id, n_requests, i))
 
-    return V, E, R, C, X, videos, endpoints, requests 
+    return V, E, R, C, X, caches, videos, endpoints, requests 
