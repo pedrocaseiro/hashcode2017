@@ -6,7 +6,6 @@ def algorithm():
 
     V, E, R, C, X, caches, videos, endpoints, requests = input.input_parser()
 
-    sys.stdout = open('output.txt', 'w')
 
     endpoint_statistics = {}
     for r in requests:
@@ -25,16 +24,11 @@ def algorithm():
 
         for i in endpoints[endpoint].cache_latency:
             for idx, j in enumerate(sorted_videos):
-                if caches[i].free_size> videos[j[1]].size:
+                if caches[i].free_size> videos[j[1]].size and j[1] not in caches[i].videos:
                     caches[i].videos.append(j[1])
                     sorted_videos.pop(idx)
                     caches[i].free_size -= videos[j[1]].size
-
-        output.output(caches)
-
-
-
-
+    output.output(caches)
 
 if __name__ == '__main__':
     algorithm()

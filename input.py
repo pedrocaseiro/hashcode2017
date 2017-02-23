@@ -32,7 +32,7 @@ def input_parser():
         caches.append(Cache(X, i))
 
     videos = []
-    [videos.append(Video(id, size)) for id, size in enumerate(map(int, input().split()))]
+    [videos.append(Video(size, id)) for id, size in enumerate(map(int, input().split()))]
 
     endpoints = []
     for i in range(E):
